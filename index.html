@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogos do Casamento | Diversão Garantida</title>
+    
+    <!-- Importando Tailwind CSS (Framework de Estilo) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fontes do Google (Playfair Display para elegância, Lato para leitura) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <!-- Ícones (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Configurações Personalizadas de Cores e Fontes -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        wedding: {
+                            bg: '#F9F7F2',       /* Off-white quente */
+                            primary: '#8DA399',  /* Verde Sálvia */
+                            dark: '#2C3E50',     /* Azul escuro quase preto */
+                            gold: '#C5A059',     /* Dourado Fosco */
+                            accent: '#E8D5B5'    /* Bege areia */
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Lato"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilos adicionais para animações */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, visibility;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+        
+        /* Ajuste fino para o scroll não cobrir o título por causa de headers fixos se houver */
+        section {
+            scroll-margin-top: 2rem;
+        }
+    </style>
+</head>
+<body class="bg-wedding-bg text-wedding-dark font-sans antialiased selection:bg-wedding-primary selection:text-white">
+
+    <!-- Cabeçalho / Hero -->
+    <header class="text-center py-12 px-4 bg-white shadow-sm border-b border-wedding-accent/30 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-wedding-primary via-wedding-gold to-wedding-primary"></div>
+        
+        <h1 class="font-serif text-4xl md:text-6xl text-wedding-dark mb-4 italic">Vamos Jogar?</h1>
+        <p class="text-lg md:text-xl text-wedding-primary font-light max-w-2xl mx-auto">
+            Bem-vindos à nossa área de diversão! Escolha um jogo abaixo para ver as regras e divirta-se conosco.
+        </p>
+        <div class="mt-6 flex justify-center gap-2 text-wedding-gold">
+            <i data-lucide="heart"></i>
+            <i data-lucide="gamepad-2"></i>
+            <i data-lucide="glass-water"></i>
+        </div>
+    </header>
+
+    <!-- Menu / Sumário -->
+    <nav class="container mx-auto px-4 py-8 max-w-4xl" id="menu">
+        <div class="bg-white p-6 rounded-2xl shadow-lg border border-wedding-accent/50 text-center">
+            <h2 class="font-serif text-2xl text-wedding-primary mb-6 border-b border-wedding-accent/30 pb-2 inline-block">Menu de Jogos</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+                <!-- Links gerados dinamicamente ou manuais -->
+                <a href="#pregadores" class="hover:bg-wedding-primary hover:text-white transition-all duration-300 border border-wedding-primary/30 rounded-lg p-3 text-sm md:text-base font-semibold shadow-sm flex items-center justify-center gap-2 group">
+                    <span class="group-hover:scale-110 transition-transform">📎</span> Pregadores
+                </a>
+                <a href="#dobble" class="hover:bg-wedding-primary hover:text-white transition-all duration-300 border border-wedding-primary/30 rounded-lg p-3 text-sm md:text-base font-semibold shadow-sm flex items-center justify-center gap-2 group">
+                    <span class="group-hover:scale-110 transition-transform">👁️</span> Dobble
+                </a>
+                <a href="#rummikub" class="hover:bg-wedding-primary hover:text-white transition-all duration-300 border border-wedding-primary/30 rounded-lg p-3 text-sm md:text-base font-semibold shadow-sm flex items-center justify-center gap-2 group">
+                    <span class="group-hover:scale-110 transition-transform">🔢</span> Rummikub
+                </a>
+                <a href="#domino" class="hover:bg-wedding-primary hover:text-white transition-all duration-300 border border-wedding-primary/30 rounded-lg p-3 text-sm md:text-base font-semibold shadow-sm flex items-center justify-center gap-2 group">
+                    <span class="group-hover:scale-110 transition-transform">🎲</span> Dominó
+                </a>
+                <a href="#uno" class="hover:bg-wedding-primary hover:text-white transition-all duration-300 border border-wedding-primary/30 rounded-lg p-3 text-sm md:text-base font-semibold shadow-sm flex items-center justify-center gap-2 group">
+                    <span class="group-hover:scale-110 transition-transform">🃏</span> Uno / No Mercy
+                </a>
+                <a href="#truco" class="hover:bg-wedding-primary hover:text-white transition-all duration-300 border border-wedding-primary/30 rounded-lg p-3 text-sm md:text-base font-semibold shadow-sm flex items-center justify-center gap-2 group">
+                    <span class="group-hover:scale-110 transition-transform">♣️</span> Truco
+                </a>
+                <a href="#taco" class="hover:bg-wedding-primary hover:text-white transition-all duration-300 border border-wedding-primary/30 rounded-lg p-3 text-sm md:text-base font-semibold shadow-sm flex items-center justify-center gap-2 group">
+                    <span class="group-hover:scale-110 transition-transform">🍕</span> Taco Gato...
+                </a>
+                <a href="#mentiroso" class="hover:bg-wedding-primary hover:text-white transition-all duration-300 border border-wedding-primary/30 rounded-lg p-3 text-sm md:text-base font-semibold shadow-sm flex items-center justify-center gap-2 group">
+                    <span class="group-hover:scale-110 transition-transform">🤥</span> O Mentiroso
+                </a>
+                <a href="#jenga" class="hover:bg-wedding-primary hover:text-white transition-all duration-300 border border-wedding-primary/30 rounded-lg p-3 text-sm md:text-base font-semibold shadow-sm flex items-center justify-center gap-2 group">
+                    <span class="group-hover:scale-110 transition-transform">🏗️</span> Jenga
+                </a>
+                <a href="#ludo" class="hover:bg-wedding-primary hover:text-white transition-all duration-300 border border-wedding-primary/30 rounded-lg p-3 text-sm md:text-base font-semibold shadow-sm flex items-center justify-center gap-2 group">
+                    <span class="group-hover:scale-110 transition-transform">♟️</span> Ludo / Fubica
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <main class="container mx-auto px-4 py-4 max-w-4xl space-y-12 mb-20">
+
+        <!-- Template do Card de Jogo (Repetido para cada item) -->
+        
+        <!-- JOGO 1: PREGADORES -->
+        <section id="pregadores" class="fade-in-section bg-white rounded-2xl shadow-xl overflow-hidden border-t-4 border-wedding-primary">
+            <div class="md:flex">
+                <div class="md:w-1/2 h-64 md:h-auto relative bg-wedding-accent/20">
+                    <!-- Placeholder de Imagem: Substitua src pelo link da sua imagem -->
+                    <img src="https://placehold.co/600x600/8DA399/FFFFFF?text=Pregadores&font=playfair" alt="Jogo dos Pregadores" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="md:w-1/2 p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-serif text-3xl text-wedding-dark mb-4 flex items-center gap-2">
+                            <span class="text-wedding-gold">01.</span> Pregadores
+                        </h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Um clássico "quebra-gelo" de casamentos! O objetivo é terminar a festa sem nenhum pregador na sua roupa.
+                        </p>
+                        <div class="bg-wedding-bg p-4 rounded-lg border border-wedding-primary/20 text-sm mb-6">
+                            <strong class="text-wedding-primary block mb-1">Como Jogar:</strong>
+                            Se alguém falar a palavra proibida (ex: "Noiva", "Casamento" ou "Bebida"), você pode prender seu pregador na roupa dessa pessoa. Quem tiver mais pregadores no final, paga uma prenda!
+                        </div>
+                    </div>
+                    <div class="text-center pt-4 border-t border-gray-100">
+                        <a href="#menu" class="inline-flex items-center gap-2 text-wedding-primary hover:text-wedding-gold transition-colors text-sm font-bold uppercase tracking-wider">
+                            <i data-lucide="arrow-up-circle" width="20"></i> Voltar ao Menu
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JOGO 2: DOBBLE -->
+        <section id="dobble" class="fade-in-section bg-white rounded-2xl shadow-xl overflow-hidden border-t-4 border-wedding-gold">
+            <div class="md:flex flex-row-reverse">
+                <div class="md:w-1/2 h-64 md:h-auto relative bg-wedding-accent/20">
+                    <img src="https://placehold.co/600x600/C5A059/FFFFFF?text=Dobble&font=playfair" alt="Dobble" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="md:w-1/2 p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-serif text-3xl text-wedding-dark mb-4 flex items-center gap-2">
+                            <span class="text-wedding-primary">02.</span> Dobble
+                        </h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Velocidade, observação e reflexos rápidos. Encontre o símbolo em comum entre duas cartas!
+                        </p>
+                        <div class="bg-wedding-bg p-4 rounded-lg border border-wedding-primary/20 text-sm mb-6">
+                            <strong class="text-wedding-primary block mb-1">Regra Básica:</strong>
+                            Existem 5 modos de jogo, mas o princípio é sempre o mesmo: seja o primeiro a encontrar e gritar o nome do único símbolo que se repete entre duas cartas.
+                        </div>
+                    </div>
+                    <div class="text-center pt-4 border-t border-gray-100">
+                        <a href="#menu" class="inline-flex items-center gap-2 text-wedding-primary hover:text-wedding-gold transition-colors text-sm font-bold uppercase tracking-wider">
+                            <i data-lucide="arrow-up-circle" width="20"></i> Voltar ao Menu
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JOGO 3: RUMMIKUB -->
+        <section id="rummikub" class="fade-in-section bg-white rounded-2xl shadow-xl overflow-hidden border-t-4 border-wedding-primary">
+            <div class="md:flex">
+                <div class="md:w-1/2 h-64 md:h-auto relative bg-wedding-accent/20">
+                    <img src="https://placehold.co/600x600/2C3E50/FFFFFF?text=Rummikub&font=playfair" alt="Rummikub" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="md:w-1/2 p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-serif text-3xl text-wedding-dark mb-4 flex items-center gap-2">
+                            <span class="text-wedding-gold">03.</span> Rummikub
+                        </h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Um jogo de estratégia com números. Combine as peças em sequências ou grupos para esvaziar seu suporte.
+                        </p>
+                        <div class="bg-wedding-bg p-4 rounded-lg border border-wedding-primary/20 text-sm mb-6">
+                            <strong class="text-wedding-primary block mb-1">Dica Rápida:</strong>
+                            Você pode manipular as peças que já estão na mesa! Separe sequências, adicione números e use o coringa com sabedoria.
+                        </div>
+                    </div>
+                    <div class="text-center pt-4 border-t border-gray-100">
+                        <a href="#menu" class="inline-flex items-center gap-2 text-wedding-primary hover:text-wedding-gold transition-colors text-sm font-bold uppercase tracking-wider">
+                            <i data-lucide="arrow-up-circle" width="20"></i> Voltar ao Menu
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JOGO 4: DOMINÓ -->
+        <section id="domino" class="fade-in-section bg-white rounded-2xl shadow-xl overflow-hidden border-t-4 border-wedding-gold">
+            <div class="md:flex flex-row-reverse">
+                <div class="md:w-1/2 h-64 md:h-auto relative bg-wedding-accent/20">
+                    <img src="https://placehold.co/600x600/E8D5B5/2C3E50?text=Dominó&font=playfair" alt="Dominó" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="md:w-1/2 p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-serif text-3xl text-wedding-dark mb-4 flex items-center gap-2">
+                            <span class="text-wedding-primary">04.</span> Dominó
+                        </h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            O clássico das reuniões de família. Jogue as peças combinando os números das pontas.
+                        </p>
+                        <div class="bg-wedding-bg p-4 rounded-lg border border-wedding-primary/20 text-sm mb-6">
+                            <strong class="text-wedding-primary block mb-1">O Objetivo:</strong>
+                            Ser o primeiro a ficar sem peças na mão. Se o jogo travar, ganha quem tiver a menor soma de pontos na mão.
+                        </div>
+                    </div>
+                    <div class="text-center pt-4 border-t border-gray-100">
+                        <a href="#menu" class="inline-flex items-center gap-2 text-wedding-primary hover:text-wedding-gold transition-colors text-sm font-bold uppercase tracking-wider">
+                            <i data-lucide="arrow-up-circle" width="20"></i> Voltar ao Menu
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JOGO 5: UNO -->
+        <section id="uno" class="fade-in-section bg-white rounded-2xl shadow-xl overflow-hidden border-t-4 border-wedding-primary">
+            <div class="md:flex">
+                <div class="md:w-1/2 h-64 md:h-auto relative bg-wedding-accent/20">
+                    <img src="https://placehold.co/600x600/d9381e/FFFFFF?text=UNO+No+Mercy&font=playfair" alt="Uno" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="md:w-1/2 p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-serif text-3xl text-wedding-dark mb-4 flex items-center gap-2">
+                            <span class="text-wedding-gold">05.</span> UNO / No Mercy
+                        </h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Cuidado: este jogo pode destruir amizades (brincadeira!). Temos a versão clássica e a temida "No Mercy".
+                        </p>
+                        <div class="bg-wedding-bg p-4 rounded-lg border border-wedding-primary/20 text-sm mb-6">
+                            <strong class="text-wedding-primary block mb-1">Regra de Ouro:</strong>
+                            Não se esqueça de gritar "UNO" quando tiver apenas uma carta. Na versão No Mercy, prepare-se para comprar +10 cartas de uma vez!
+                        </div>
+                    </div>
+                    <div class="text-center pt-4 border-t border-gray-100">
+                        <a href="#menu" class="inline-flex items-center gap-2 text-wedding-primary hover:text-wedding-gold transition-colors text-sm font-bold uppercase tracking-wider">
+                            <i data-lucide="arrow-up-circle" width="20"></i> Voltar ao Menu
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JOGO 6: TRUCO -->
+        <section id="truco" class="fade-in-section bg-white rounded-2xl shadow-xl overflow-hidden border-t-4 border-wedding-gold">
+            <div class="md:flex flex-row-reverse">
+                <div class="md:w-1/2 h-64 md:h-auto relative bg-wedding-accent/20">
+                    <img src="https://placehold.co/600x600/4a7c59/FFFFFF?text=Truco&font=playfair" alt="Truco" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="md:w-1/2 p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-serif text-3xl text-wedding-dark mb-4 flex items-center gap-2">
+                            <span class="text-wedding-primary">06.</span> Truco
+                        </h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Para os barulhentos! Um jogo de blefe, gritos e sinais secretos.
+                        </p>
+                        <div class="bg-wedding-bg p-4 rounded-lg border border-wedding-primary/20 text-sm mb-6">
+                            <strong class="text-wedding-primary block mb-1">Atenção:</strong>
+                            Estamos jogando com manilha velha ou nova? Combinem antes de começar para não dar briga no dia mais feliz das nossas vidas!
+                        </div>
+                    </div>
+                    <div class="text-center pt-4 border-t border-gray-100">
+                        <a href="#menu" class="inline-flex items-center gap-2 text-wedding-primary hover:text-wedding-gold transition-colors text-sm font-bold uppercase tracking-wider">
+                            <i data-lucide="arrow-up-circle" width="20"></i> Voltar ao Menu
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JOGO 7: TACO GATO -->
+        <section id="taco" class="fade-in-section bg-white rounded-2xl shadow-xl overflow-hidden border-t-4 border-wedding-primary">
+            <div class="md:flex">
+                <div class="md:w-1/2 h-64 md:h-auto relative bg-wedding-accent/20">
+                    <img src="https://placehold.co/600x600/f2a900/FFFFFF?text=Taco+Gato...&font=playfair" alt="Taco Gato" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="md:w-1/2 p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-serif text-3xl text-wedding-dark mb-4 flex items-center gap-2">
+                            <span class="text-wedding-gold">07.</span> Taco Gato Cabra Queijo Pizza
+                        </h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Memorize a sequência. Se a carta virada coincidir com a palavra falada, batam na pilha!
+                        </p>
+                        <div class="bg-wedding-bg p-4 rounded-lg border border-wedding-primary/20 text-sm mb-6">
+                            <strong class="text-wedding-primary block mb-1">Cuidado com as Mãos:</strong>
+                            O último a bater leva todas as cartas. Cuidado com anéis e relógios na hora da batida frenética!
+                        </div>
+                    </div>
+                    <div class="text-center pt-4 border-t border-gray-100">
+                        <a href="#menu" class="inline-flex items-center gap-2 text-wedding-primary hover:text-wedding-gold transition-colors text-sm font-bold uppercase tracking-wider">
+                            <i data-lucide="arrow-up-circle" width="20"></i> Voltar ao Menu
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- JOGO 8: O MENTIROSO DO BAR -->
+         <section id="mentiroso" class="fade-in-section bg-white rounded-2xl shadow-xl overflow-hidden border-t-4 border-wedding-gold">
+            <div class="md:flex flex-row-reverse">
+                <div class="md:w-1/2 h-64 md:h-auto relative bg-wedding-accent/20">
+                    <img src="https://placehold.co/600x600/800020/FFFFFF?text=Mentiroso+do+Bar&font=playfair" alt="Mentiroso do Bar" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="md:w-1/2 p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-serif text-3xl text-wedding-dark mb-4 flex items-center gap-2">
+                            <span class="text-wedding-primary">08.</span> O Mentiroso do Bar
+                        </h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Um jogo perfeito para acompanhar os drinks. Quem consegue enganar melhor os amigos?
+                        </p>
+                        <div class="bg-wedding-bg p-4 rounded-lg border border-wedding-primary/20 text-sm mb-6">
+                            <strong class="text-wedding-primary block mb-1">Dinâmica:</strong>
+                            Você deve contar uma história baseada na carta que tirou. Se for o Mentiroso, invente! Se os outros descobrirem, você perde.
+                        </div>
+                    </div>
+                    <div class="text-center pt-4 border-t border-gray-100">
+                        <a href="#menu" class="inline-flex items-center gap-2 text-wedding-primary hover:text-wedding-gold transition-colors text-sm font-bold uppercase tracking-wider">
+                            <i data-lucide="arrow-up-circle" width="20"></i> Voltar ao Menu
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JOGO 9: JENGA -->
+        <section id="jenga" class="fade-in-section bg-white rounded-2xl shadow-xl overflow-hidden border-t-4 border-wedding-primary">
+            <div class="md:flex">
+                <div class="md:w-1/2 h-64 md:h-auto relative bg-wedding-accent/20">
+                    <img src="https://placehold.co/600x600/8B4513/FFFFFF?text=Jenga&font=playfair" alt="Jenga" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="md:w-1/2 p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-serif text-3xl text-wedding-dark mb-4 flex items-center gap-2">
+                            <span class="text-wedding-gold">09.</span> Jenga
+                        </h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Mãos firmes são essenciais! Remova um bloco da torre e coloque no topo sem derrubar tudo.
+                        </p>
+                        <div class="bg-wedding-bg p-4 rounded-lg border border-wedding-primary/20 text-sm mb-6">
+                            <strong class="text-wedding-primary block mb-1">Desafio Extra:</strong>
+                            Algumas peças podem ter desafios escritos (ex: "Beba um shot" ou "Conte uma piada"). Fique atento!
+                        </div>
+                    </div>
+                    <div class="text-center pt-4 border-t border-gray-100">
+                        <a href="#menu" class="inline-flex items-center gap-2 text-wedding-primary hover:text-wedding-gold transition-colors text-sm font-bold uppercase tracking-wider">
+                            <i data-lucide="arrow-up-circle" width="20"></i> Voltar ao Menu
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JOGO 10: LUDO/FUBICA -->
+        <section id="ludo" class="fade-in-section bg-white rounded-2xl shadow-xl overflow-hidden border-t-4 border-wedding-gold">
+            <div class="md:flex flex-row-reverse">
+                <div class="md:w-1/2 h-64 md:h-auto relative bg-wedding-accent/20">
+                    <img src="https://placehold.co/600x600/FFD700/2C3E50?text=Ludo+%2F+Fubica&font=playfair" alt="Ludo" class="absolute inset-0 w-full h-full object-cover">
+                </div>
+                <div class="md:w-1/2 p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-serif text-3xl text-wedding-dark mb-4 flex items-center gap-2">
+                            <span class="text-wedding-primary">10.</span> Ludo / Fubica
+                        </h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Corrida ao redor do tabuleiro! Leve todos os seus peões para o centro antes dos adversários.
+                        </p>
+                        <div class="bg-wedding-bg p-4 rounded-lg border border-wedding-primary/20 text-sm mb-6">
+                            <strong class="text-wedding-primary block mb-1">Estratégia:</strong>
+                            Você pode "comer" a peça do adversário e mandá-la de volta para o início. Mas cuidado, a vingança é plena!
+                        </div>
+                    </div>
+                    <div class="text-center pt-4 border-t border-gray-100">
+                        <a href="#menu" class="inline-flex items-center gap-2 text-wedding-primary hover:text-wedding-gold transition-colors text-sm font-bold uppercase tracking-wider">
+                            <i data-lucide="arrow-up-circle" width="20"></i> Voltar ao Menu
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-wedding-dark text-wedding-accent py-8 text-center">
+        <p class="font-serif italic text-lg mb-2">Obrigado por celebrar conosco!</p>
+        <p class="text-sm opacity-60">Feito com carinho para o nosso grande dia.</p>
+    </footer>
+
+    <!-- Script para Ícones e Animações -->
+    <script>
+        // Inicializa os ícones
+        lucide.createIcons();
+
+        // Animação de Fade In ao rolar a página (Intersection Observer)
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Para de observar depois que animou
+                    }
+                });
+            }, observerOptions);
+
+            const sections = document.querySelectorAll('.fade-in-section');
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
